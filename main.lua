@@ -1,3 +1,8 @@
+Class = require 'lib.classic'
+
+lovr.mouse = require 'lib.lovr-mouse'
+lovr.json = require 'lib.json'
+
 function lovr.load()
 
 end
