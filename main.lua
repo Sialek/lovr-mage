@@ -3,6 +3,8 @@ Class = require 'lib.classic'
 lovr.mouse = require 'lib.lovr-mouse'
 lovr.json = require 'lib.json'
 
+debugHelper = require 'util.debug_helper'
+
 function lovr.load()
 
 end
@@ -12,7 +14,7 @@ function lovr.update(dt)
 end
 
 function lovr.draw(pass)
-
+  debugHelper.graphics.drawWorldAxisGrid(pass)
 end
 
 function lovr.keypressed(key, scancode, isrepeat)
