@@ -26,7 +26,7 @@ end
 
 function lovr.draw(pass)
   if not lovr.headset.isActive() then
-    activePlayer.firstPersonCamera:applyToPass(pass)
+    activePlayer:getActiveCamera():applyToPass(pass)
   end
 
   debugHelper.graphics.drawWorldAxisGrid(pass)

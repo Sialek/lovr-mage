@@ -36,9 +36,12 @@ function player:load()
   self:syncFirstPersonCamera()
 
   self.thirdPersonCamera = camera()
-  self.thirdPersonCamera.position = self.position + vector(0, 2.0, 1)
-  self.thirdPersonCamera.orientation = self.orientation * quaternion(0, 0, 0, 1)
   self.thirdPersonCamera:load()
+  self:syncThirdPersonCamera()
+end
+
+function player:getLookRotation()
+  return self.orientation * quaternion(self.pitch, 1, 0, 0)
 end
 
 function player:syncFirstPersonCamera()
@@ -49,7 +52,42 @@ function player:syncFirstPersonCamera()
   end
 
   self.firstPersonCamera.position = self.position + self.orientation * self.eyeOffset
-  self.firstPersonCamera.orientation = self.orientation * quaternion(self.pitch, 1, 0, 0)
+  self.firstPersonCamera.orientation = self:getLookRotation()
+end
+
+function player:syncThirdPersonCamera()
+  if lovr.headset.isActive() then
+    return
+  end
+
+  local lookRotation = self:getLookRotation()
+  local forward = lookRotation * vector(0, 0, -1)
+  local pivot = self.position + self.orientation * self.thirdPersonPivotOffset
+  self.thirdPersonCamera.position = pivot - forward * self.thirdPersonDistance
+  self.thirdPersonCamera.orientation = lookRotation
+end
+
+function player:getActiveCamera()
+  if self.cameraMode == 'third' and not lovr.headset.isActive() then
+    return self.thirdPersonCamera
+  end
+  return self.firstPersonCamera
+end
+
+function player:toggleCameraMode()
+  if lovr.headset.isActive() then
+    return
+  end
+
+  if self.cameraMode == 'first' then
+    self.cameraMode = 'third'
+  else
+    self.cameraMode = 'first'
+  end
+end
+
+function player:isThirdPerson()
+  return self.cameraMode == 'third' and not lovr.headset.isActive()
 end
 
 function player:updateLook(dt)
@@ -101,10 +139,16 @@ function player:update(dt)
   self.inputHandler:update(dt)
   self:updateLook(dt)
   self:updateMovement(dt)
+  self.body:update(dt)
   self:syncFirstPersonCamera()
+  self:syncThirdPersonCamera()
 end
 
 function player:draw(pass)
+  if not self:isThirdPerson() then
+    return
+  end
+
   pass:push()
   pass:translate(self.position)
   pass:rotate(self.orientation)

@@ -65,6 +65,18 @@ function inputHandler:keypressed(key, scancode, isrepeat)
     lovr.event.quit()
   end
 
+  if key == 'f3' then
+    debugBodyReferences = not debugBodyReferences
+    return
+  end
+
+  if key == 'v' then
+    if self.target.toggleCameraMode then
+      self.target:toggleCameraMode()
+    end
+    return
+  end
+
   if self.target.keypressed then
     self.target:keypressed(key, scancode, isrepeat)
   end
