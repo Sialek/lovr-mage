@@ -12,6 +12,22 @@ local referenceKindColors = {
   slot = { 0.2, 0.9, 1, 1 },
 }
 
+local depthRainbowColors = {
+  { 1.0, 0.2, 0.2 },
+  { 1.0, 0.55, 0.1 },
+  { 1.0, 1.0, 0.2 },
+  { 0.2, 1.0, 0.25 },
+  { 0.2, 0.95, 1.0 },
+  { 0.25, 0.35, 1.0 },
+  { 0.65, 0.2, 1.0 },
+}
+
+function debugHelper.graphics.getDepthColor(depth)
+  local index = ((depth - 1) % #depthRainbowColors) + 1
+  local color = depthRainbowColors[index]
+  return color[1], color[2], color[3]
+end
+
 function debugHelper.graphics.drawReferencePoint(pass, position, kind)
   local color = referenceKindColors[kind] or referenceKindColors.joint
   pass:setColor(color[1], color[2], color[3], color[4])

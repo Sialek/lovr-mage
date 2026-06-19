@@ -13,6 +13,7 @@ function body:new(characterMappingPath)
   self.partsById = {}
   self.rootPart = nil
   self.rootOffset = vector(0, 0, 0)
+  self.maxTreeDepth = 1
 end
 
 function body:load()
@@ -59,6 +60,19 @@ function body:buildPartTree()
   if not self.rootPart then
     error('Root part "' .. tostring(self.planData.root) .. '" not found in body plan')
   end
+
+  self.maxTreeDepth = 1
+  self:assignPartDepths(self.rootPart, 1)
+end
+
+function body:assignPartDepths(part, depth)
+  part.depth = depth
+  if depth > self.maxTreeDepth then
+    self.maxTreeDepth = depth
+  end
+  for _, child in ipairs(part.children) do
+    self:assignPartDepths(child, depth + 1)
+  end
 end
 
 function body:resolvePartTransforms(part, parentPosition, parentRotation, parentAttachJoint)
@@ -78,10 +92,21 @@ function body:update(dt)
   end
 end
 
-function body:drawPartTree(pass, part)
-  part:draw(pass)
+function body:drawPartTree(pass, part, depth)
+  depth = depth or 1
+
+  if debugBodyProgressiveRender then
+    if depth > debugBodyRenderDepth then
+      return
+    end
+    local alpha = depth < debugBodyRenderDepth and 0.5 or 1.0
+    part:draw(pass, { progressive = true, depth = depth, alpha = alpha })
+  else
+    part:draw(pass)
+  end
+
   for _, child in ipairs(part.children) do
-    self:drawPartTree(pass, child)
+    self:drawPartTree(pass, child, depth + 1)
   end
 end
 
@@ -102,7 +127,12 @@ function body:draw(pass)
   pass:rotate(self.rotation)
   pass:scale(self.scale)
 
+  pass:push()
+  if debugBodyProgressiveRender then
+    pass:setBlendMode('alpha')
+  end
   self:drawPartTree(pass, self.rootPart)
+  pass:pop()
 
   if debugBodyReferences then
     self:drawDebugReferences(pass, self.rootPart, false)

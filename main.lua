@@ -9,6 +9,8 @@ lovr.json = require 'lib.json'
 debugHelper = require 'util.debug_helper'
 
 debugBodyReferences = false
+debugBodyProgressiveRender = false
+debugBodyRenderDepth = 1
 
 Player = require 'actor.player'
 

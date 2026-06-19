@@ -74,14 +74,23 @@ function bodyPart:getReferenceWorld(referenceName)
   return ref:getWorldPosition(self.position, self.rotation)
 end
 
-function bodyPart:drawPlaceholder(pass)
+function bodyPart:drawPlaceholder(pass, drawOptions)
   local visual = self.visual
-  local color = visual.color or defaultVisual.color
   local offset = visual.offset or defaultVisual.offset
   local size = visual.size or defaultVisual.size
   local shape = visual.shape or defaultVisual.shape
 
-  pass:setColor(color[1], color[2], color[3], color[4] or 1)
+  local r, g, b, a
+  if drawOptions and drawOptions.progressive then
+    r, g, b = debugHelper.graphics.getDepthColor(drawOptions.depth)
+    a = drawOptions.alpha or 1
+  else
+    local color = visual.color or defaultVisual.color
+    r, g, b = color[1], color[2], color[3]
+    a = color[4] or 1
+  end
+
+  pass:setColor(r, g, b, a)
   pass:translate(offset[1] or 0, offset[2] or 0, offset[3] or 0)
 
   if shape == 'box' then
@@ -96,11 +105,11 @@ function bodyPart:drawPlaceholder(pass)
   end
 end
 
-function bodyPart:draw(pass)
+function bodyPart:draw(pass, drawOptions)
   pass:push()
   pass:translate(self.position)
   pass:rotate(self.rotation)
-  self:drawPlaceholder(pass)
+  self:drawPlaceholder(pass, drawOptions)
   pass:pop()
 end
 

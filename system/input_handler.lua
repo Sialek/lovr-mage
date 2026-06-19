@@ -77,6 +77,32 @@ function inputHandler:keypressed(key, scancode, isrepeat)
     return
   end
 
+  if key == 'p' then
+    debugBodyProgressiveRender = not debugBodyProgressiveRender
+    if debugBodyProgressiveRender then
+      debugBodyRenderDepth = 1
+      local maxDepth = self.target.body and self.target.body.maxTreeDepth or 1
+      print(string.format('Progressive body render ON (depth %d / %d). Numpad +/- to step.', debugBodyRenderDepth, maxDepth))
+    else
+      print('Progressive body render OFF')
+    end
+    return
+  end
+
+  if debugBodyProgressiveRender and self.target.body then
+    local maxDepth = self.target.body.maxTreeDepth
+    if key == 'kp+' or key == 'kpadd' then
+      debugBodyRenderDepth = math.min(maxDepth, debugBodyRenderDepth + 1)
+      print(string.format('Body render depth: %d / %d', debugBodyRenderDepth, maxDepth))
+      return
+    end
+    if key == 'kp-' or key == 'kpsub' then
+      debugBodyRenderDepth = math.max(1, debugBodyRenderDepth - 1)
+      print(string.format('Body render depth: %d / %d', debugBodyRenderDepth, maxDepth))
+      return
+    end
+  end
+
   if self.target.keypressed then
     self.target:keypressed(key, scancode, isrepeat)
   end
