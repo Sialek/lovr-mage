@@ -74,6 +74,31 @@ function bodyPart:getReferenceWorld(referenceName)
   return ref:getWorldPosition(self.position, self.rotation)
 end
 
+local function buildVisualOrientation(visual)
+  local rotation = visual.rotation or { 0, 0, 0 }
+  return quaternion(
+    math.rad(rotation[2] or 0), 0, 1, 0
+  ) * quaternion(
+    math.rad(rotation[1] or 0), 1, 0, 0
+  ) * quaternion(
+    math.rad(rotation[3] or 0), 0, 0, 1
+  )
+end
+
+-- LÖVR capsules extend along local +Z by default (see Pass:capsule notes).
+local function buildCapsuleOrientation(visual)
+  local orientation = buildVisualOrientation(visual)
+  local axis = visual.axis or 'y'
+  if axis == 'y' then
+    orientation = orientation * quaternion(-math.pi / 2, 1, 0, 0)
+  end
+  return orientation
+end
+
+local function buildVisualPosition(offset)
+  return vector(offset[1] or 0, offset[2] or 0, offset[3] or 0)
+end
+
 function bodyPart:drawPlaceholder(pass, drawOptions)
   local visual = self.visual
   local offset = visual.offset or defaultVisual.offset
@@ -91,17 +116,24 @@ function bodyPart:drawPlaceholder(pass, drawOptions)
   end
 
   pass:setColor(r, g, b, a)
-  pass:translate(offset[1] or 0, offset[2] or 0, offset[3] or 0)
+
+  local position = buildVisualPosition(offset)
 
   if shape == 'box' then
-    pass:box(size[1] or 0.1, size[2] or 0.1, size[3] or 0.1)
+    pass:box(
+      position,
+      vector(size[1] or 0.1, size[2] or 0.1, size[3] or 0.1),
+      buildVisualOrientation(visual)
+    )
   elseif shape == 'capsule' then
-    local radius = size[1] or 0.1
-    local length = size[2] or 0.2
-    pass:capsule(vector(0, 0, 0), radius, length, 0, 90, 0, 0, 8)
+    pass:capsule(
+      position,
+      size[1] or 0.1,
+      size[2] or 0.2,
+      buildCapsuleOrientation(visual)
+    )
   else
-    local radius = size[1] or 0.1
-    pass:sphere(vector(0, 0, 0), radius)
+    pass:sphere(position, size[1] or 0.1, buildVisualOrientation(visual))
   end
 end
 

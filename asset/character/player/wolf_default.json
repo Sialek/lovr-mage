@@ -6,166 +6,278 @@
   "parts": {
     "torso": {
       "visual": {
-        "shape": "capsule",
-        "size": [0.22, 0.45, 0.35],
+        "shape": "box",
+        "size": [0.26, 0.28, 0.12],
         "color": [0.45, 0.35, 0.25, 1]
       }
     },
     "neck": {
       "visual": {
         "shape": "capsule",
-        "size": [0.08, 0.12, 0.08],
+        "axis": "y",
+        "size": [0.045, 0.09, 0.045],
+        "offset": [0, 0.045, 0],
         "color": [0.48, 0.38, 0.28, 1]
       }
     },
-    "head": {
+    "shoulder_left": {
       "visual": {
-        "shape": "box",
-        "size": [0.18, 0.16, 0.2],
-        "color": [0.5, 0.4, 0.3, 1]
+        "shape": "sphere",
+        "size": [0.05, 0.05, 0.05],
+        "color": [0.44, 0.34, 0.24, 1]
       }
     },
-    "snout": {
+    "shoulder_right": {
       "visual": {
-        "shape": "box",
-        "size": [0.1, 0.08, 0.14],
-        "offset": [0, 0, 0.07],
-        "color": [0.4, 0.32, 0.22, 1]
-      }
-    },
-    "ear_left": {
-      "visual": {
-        "shape": "box",
-        "size": [0.04, 0.1, 0.03],
-        "offset": [0, 0.05, 0],
-        "color": [0.42, 0.32, 0.22, 1]
-      }
-    },
-    "ear_right": {
-      "visual": {
-        "shape": "box",
-        "size": [0.04, 0.1, 0.03],
-        "offset": [0, 0.05, 0],
-        "color": [0.42, 0.32, 0.22, 1]
+        "shape": "sphere",
+        "size": [0.05, 0.05, 0.05],
+        "color": [0.44, 0.34, 0.24, 1]
       }
     },
     "arm_left_upper": {
       "visual": {
         "shape": "capsule",
-        "size": [0.07, 0.22, 0.07],
-        "offset": [0, -0.11, 0],
+        "axis": "y",
+        "size": [0.045, 0.2, 0.045],
+        "offset": [0, -0.1, 0],
         "color": [0.45, 0.35, 0.25, 1]
+      }
+    },
+    "elbow_left": {
+      "visual": {
+        "shape": "sphere",
+        "size": [0.04, 0.04, 0.04],
+        "color": [0.43, 0.33, 0.23, 1]
       }
     },
     "arm_left_lower": {
       "visual": {
         "shape": "capsule",
-        "size": [0.06, 0.2, 0.06],
-        "offset": [0, -0.1, 0],
+        "axis": "y",
+        "size": [0.04, 0.18, 0.04],
+        "offset": [0, -0.09, 0],
         "color": [0.43, 0.33, 0.23, 1]
+      }
+    },
+    "wrist_left": {
+      "visual": {
+        "shape": "sphere",
+        "size": [0.035, 0.035, 0.035],
+        "color": [0.42, 0.32, 0.22, 1]
       }
     },
     "hand_left": {
       "visual": {
-        "shape": "sphere",
-        "size": [0.06, 0.06, 0.06],
-        "offset": [0, -0.03, 0],
+        "shape": "box",
+        "size": [0.04, 0.06, 0.03],
+        "offset": [0, -0.03, 0.01],
         "color": [0.4, 0.3, 0.2, 1]
       }
     },
     "arm_right_upper": {
       "visual": {
         "shape": "capsule",
-        "size": [0.07, 0.22, 0.07],
-        "offset": [0, -0.11, 0],
+        "axis": "y",
+        "size": [0.045, 0.2, 0.045],
+        "offset": [0, -0.1, 0],
         "color": [0.45, 0.35, 0.25, 1]
+      }
+    },
+    "elbow_right": {
+      "visual": {
+        "shape": "sphere",
+        "size": [0.04, 0.04, 0.04],
+        "color": [0.43, 0.33, 0.23, 1]
       }
     },
     "arm_right_lower": {
       "visual": {
         "shape": "capsule",
-        "size": [0.06, 0.2, 0.06],
-        "offset": [0, -0.1, 0],
+        "axis": "y",
+        "size": [0.04, 0.18, 0.04],
+        "offset": [0, -0.09, 0],
         "color": [0.43, 0.33, 0.23, 1]
+      }
+    },
+    "wrist_right": {
+      "visual": {
+        "shape": "sphere",
+        "size": [0.035, 0.035, 0.035],
+        "color": [0.42, 0.32, 0.22, 1]
       }
     },
     "hand_right": {
       "visual": {
-        "shape": "sphere",
-        "size": [0.06, 0.06, 0.06],
-        "offset": [0, -0.03, 0],
+        "shape": "box",
+        "size": [0.04, 0.06, 0.03],
+        "offset": [0, -0.03, 0.01],
         "color": [0.4, 0.3, 0.2, 1]
+      }
+    },
+    "midriff": {
+      "visual": {
+        "shape": "box",
+        "size": [0.22, 0.08, 0.1],
+        "offset": [0, -0.04, 0],
+        "color": [0.44, 0.34, 0.24, 1]
+      }
+    },
+    "pelvis": {
+      "visual": {
+        "shape": "box",
+        "size": [0.24, 0.1, 0.11],
+        "offset": [0, -0.05, 0],
+        "color": [0.43, 0.33, 0.23, 1]
+      }
+    },
+    "hip_left": {
+      "visual": {
+        "shape": "sphere",
+        "size": [0.05, 0.05, 0.05],
+        "color": [0.44, 0.34, 0.24, 1]
+      }
+    },
+    "hip_right": {
+      "visual": {
+        "shape": "sphere",
+        "size": [0.05, 0.05, 0.05],
+        "color": [0.44, 0.34, 0.24, 1]
       }
     },
     "leg_left_upper": {
       "visual": {
         "shape": "capsule",
-        "size": [0.09, 0.28, 0.09],
-        "offset": [0, -0.14, 0.025],
+        "axis": "y",
+        "size": [0.055, 0.24, 0.055],
+        "offset": [0, -0.12, 0.015],
         "color": [0.45, 0.35, 0.25, 1]
+      }
+    },
+    "knee_left": {
+      "visual": {
+        "shape": "sphere",
+        "size": [0.045, 0.045, 0.045],
+        "color": [0.43, 0.33, 0.23, 1]
       }
     },
     "leg_left_lower": {
       "visual": {
         "shape": "capsule",
-        "size": [0.07, 0.22, 0.07],
-        "offset": [0, -0.11, -0.04],
+        "axis": "y",
+        "size": [0.045, 0.2, 0.045],
+        "offset": [0, -0.1, -0.035],
         "color": [0.43, 0.33, 0.23, 1]
+      }
+    },
+    "hock_left": {
+      "visual": {
+        "shape": "sphere",
+        "size": [0.04, 0.04, 0.04],
+        "color": [0.42, 0.32, 0.22, 1]
       }
     },
     "paw_left": {
       "visual": {
         "shape": "box",
-        "size": [0.08, 0.05, 0.12],
-        "offset": [0, -0.025, 0.04],
+        "size": [0.05, 0.035, 0.06],
+        "offset": [0, -0.018, 0.02],
         "color": [0.35, 0.28, 0.2, 1]
       }
     },
     "leg_right_upper": {
       "visual": {
         "shape": "capsule",
-        "size": [0.09, 0.28, 0.09],
-        "offset": [0, -0.14, 0.025],
+        "axis": "y",
+        "size": [0.055, 0.24, 0.055],
+        "offset": [0, -0.12, 0.015],
         "color": [0.45, 0.35, 0.25, 1]
+      }
+    },
+    "knee_right": {
+      "visual": {
+        "shape": "sphere",
+        "size": [0.045, 0.045, 0.045],
+        "color": [0.43, 0.33, 0.23, 1]
       }
     },
     "leg_right_lower": {
       "visual": {
         "shape": "capsule",
-        "size": [0.07, 0.22, 0.07],
-        "offset": [0, -0.11, -0.04],
+        "axis": "y",
+        "size": [0.045, 0.2, 0.045],
+        "offset": [0, -0.1, -0.035],
         "color": [0.43, 0.33, 0.23, 1]
+      }
+    },
+    "hock_right": {
+      "visual": {
+        "shape": "sphere",
+        "size": [0.04, 0.04, 0.04],
+        "color": [0.42, 0.32, 0.22, 1]
       }
     },
     "paw_right": {
       "visual": {
         "shape": "box",
-        "size": [0.08, 0.05, 0.12],
-        "offset": [0, -0.025, 0.04],
+        "size": [0.05, 0.035, 0.06],
+        "offset": [0, -0.018, 0.02],
         "color": [0.35, 0.28, 0.2, 1]
+      }
+    },
+    "head": {
+      "visual": {
+        "shape": "box",
+        "size": [0.11, 0.1, 0.09],
+        "color": [0.5, 0.4, 0.3, 1]
+      }
+    },
+    "snout": {
+      "visual": {
+        "shape": "box",
+        "size": [0.05, 0.04, 0.06],
+        "offset": [0, 0, 0.03],
+        "color": [0.4, 0.32, 0.22, 1]
+      }
+    },
+    "ear_left": {
+      "visual": {
+        "shape": "box",
+        "size": [0.015, 0.06, 0.025],
+        "offset": [0, 0.03, 0],
+        "color": [0.42, 0.32, 0.22, 1]
+      }
+    },
+    "ear_right": {
+      "visual": {
+        "shape": "box",
+        "size": [0.015, 0.06, 0.025],
+        "offset": [0, 0.03, 0],
+        "color": [0.42, 0.32, 0.22, 1]
       }
     },
     "tail_base": {
       "visual": {
         "shape": "capsule",
-        "size": [0.06, 0.25, 0.06],
-        "offset": [0, 0, -0.125],
+        "axis": "z",
+        "size": [0.045, 0.22, 0.045],
+        "offset": [0, 0, -0.11],
         "color": [0.45, 0.35, 0.25, 1]
       }
     },
     "tail_mid": {
       "visual": {
         "shape": "capsule",
-        "size": [0.05, 0.22, 0.05],
-        "offset": [0, 0.02, -0.11],
+        "axis": "z",
+        "size": [0.04, 0.2, 0.04],
+        "offset": [0, 0.015, -0.1],
         "color": [0.43, 0.33, 0.23, 1]
       }
     },
     "tail_tip": {
       "visual": {
         "shape": "sphere",
-        "size": [0.05, 0.05, 0.05],
-        "offset": [0, 0.02, -0.025],
+        "size": [0.04, 0.04, 0.04],
+        "offset": [0, 0.02, -0.02],
         "color": [0.5, 0.4, 0.35, 1]
       }
     }

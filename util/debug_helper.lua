@@ -12,20 +12,32 @@ local referenceKindColors = {
   slot = { 0.2, 0.9, 1, 1 },
 }
 
-local depthRainbowColors = {
-  { 1.0, 0.2, 0.2 },
-  { 1.0, 0.55, 0.1 },
-  { 1.0, 1.0, 0.2 },
-  { 0.2, 1.0, 0.25 },
-  { 0.2, 0.95, 1.0 },
-  { 0.25, 0.35, 1.0 },
-  { 0.65, 0.2, 1.0 },
-}
-
 function debugHelper.graphics.getDepthColor(depth)
-  local index = ((depth - 1) % #depthRainbowColors) + 1
-  local color = depthRainbowColors[index]
-  return color[1], color[2], color[3]
+  local hue = ((depth - 1) * 0.12) % 1.0
+  local saturation = 0.85
+  local value = 0.95
+
+  local chroma = value * saturation
+  local huePrime = hue * 6
+  local x = chroma * (1 - math.abs(huePrime % 2 - 1))
+  local r, g, b
+
+  if huePrime < 1 then
+    r, g, b = chroma, x, 0
+  elseif huePrime < 2 then
+    r, g, b = x, chroma, 0
+  elseif huePrime < 3 then
+    r, g, b = 0, chroma, x
+  elseif huePrime < 4 then
+    r, g, b = 0, x, chroma
+  elseif huePrime < 5 then
+    r, g, b = x, 0, chroma
+  else
+    r, g, b = chroma, 0, x
+  end
+
+  local m = value - chroma
+  return r + m, g + m, b + m
 end
 
 function debugHelper.graphics.drawReferencePoint(pass, position, kind)

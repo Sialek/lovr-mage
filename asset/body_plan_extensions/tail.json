@@ -1,7 +1,7 @@
 {
   "id": "tail",
   "attach": {
-    "part": "torso",
+    "part": "pelvis",
     "reference": "joint_tail_base"
   },
   "root": "tail_base",
