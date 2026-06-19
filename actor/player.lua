@@ -125,7 +125,7 @@ function player:updateLook(dt)
   end
 
   self.yaw = self.yaw - dx * self.lookSpeed
-  self.pitch = math.max(-self.cameraPitchLimit, math.min(self.cameraPitchLimit, self.pitch + dy * self.lookSpeed))
+  self.pitch = math.max(-self.cameraPitchLimit, math.min(self.cameraPitchLimit, self.pitch - dy * self.lookSpeed))
   self.orientation = quaternion(self.yaw, 0, 1, 0)
 end
 
