@@ -6,6 +6,18 @@ function debugHelper:new()
 
 end
 
+local referenceKindColors = {
+  origin = { 1, 1, 1, 1 },
+  joint = { 1, 0.9, 0.2, 1 },
+  slot = { 0.2, 0.9, 1, 1 },
+}
+
+function debugHelper.graphics.drawReferencePoint(pass, position, kind)
+  local color = referenceKindColors[kind] or referenceKindColors.joint
+  pass:setColor(color[1], color[2], color[3], color[4])
+  pass:sphere(position, kind == 'origin' and 0.015 or 0.025)
+end
+
 function debugHelper.graphics.drawEmpty(pass, position, orientation, scale)
   local position = position or vector(0, 0, 0)
   local orientation = orientation or quaternion(0, 0, 0, 1)

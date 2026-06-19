@@ -8,6 +8,8 @@ lovr.json = require 'lib.json'
 
 debugHelper = require 'util.debug_helper'
 
+debugBodyReferences = false
+
 Player = require 'actor.player'
 
 players = {}

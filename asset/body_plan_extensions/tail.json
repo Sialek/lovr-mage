@@ -1,0 +1,37 @@
+{
+  "id": "tail",
+  "attach": {
+    "part": "torso",
+    "reference": "joint_tail_base"
+  },
+  "root": "tail_base",
+  "parts": {
+    "tail_base": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_tail_mid": [0, 0.02, -0.25]
+      },
+      "children": {
+        "tail_mid": { "attach": "joint_tail_mid" }
+      }
+    },
+    "tail_mid": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_tail_tip": [0, 0.04, -0.22]
+      },
+      "children": {
+        "tail_tip": { "attach": "joint_tail_tip" }
+      }
+    },
+    "tail_tip": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0]
+      },
+      "children": {}
+    }
+  }
+}

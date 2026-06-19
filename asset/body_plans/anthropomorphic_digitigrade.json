@@ -1,0 +1,193 @@
+{
+  "id": "anthropomorphic_digitigrade",
+  "name": "Anthropomorphic Digitigrade",
+  "version": 1,
+  "_readme": "origin = part center. joint_* = child attach points. slot_* = accessory anchors. vital = fatal if destroyed (future).",
+  "root": "torso",
+  "traits": {
+    "locomotion": "digitigrade",
+    "posture": "biped"
+  },
+  "systems": {
+    "cardiovascular": "torso",
+    "respiratory": "torso",
+    "nervous": "head"
+  },
+  "extensions": ["tail"],
+  "parts": {
+    "torso": {
+      "vital": true,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_neck": [0, 0.35, 0.08],
+        "joint_shoulder_left": [-0.22, 0.28, 0],
+        "joint_shoulder_right": [0.22, 0.28, 0],
+        "joint_hip_left": [-0.12, -0.35, 0],
+        "joint_hip_right": [0.12, -0.35, 0],
+        "joint_tail_base": [0, -0.05, -0.18],
+        "slot_vest": [0, 0.1, 0.05]
+      },
+      "children": {
+        "neck": { "attach": "joint_neck" },
+        "arm_left_upper": { "attach": "joint_shoulder_left" },
+        "arm_right_upper": { "attach": "joint_shoulder_right" },
+        "leg_left_upper": { "attach": "joint_hip_left" },
+        "leg_right_upper": { "attach": "joint_hip_right" }
+      }
+    },
+    "neck": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_head": [0, 0.12, 0.02]
+      },
+      "children": {
+        "head": { "attach": "joint_head" }
+      }
+    },
+    "head": {
+      "vital": true,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_snout": [0, -0.02, 0.1],
+        "joint_ear_left": [-0.08, 0.12, 0],
+        "joint_ear_right": [0.08, 0.12, 0],
+        "slot_eyes": [0, 0.04, 0.09]
+      },
+      "children": {
+        "snout": { "attach": "joint_snout" },
+        "ear_left": { "attach": "joint_ear_left" },
+        "ear_right": { "attach": "joint_ear_right" }
+      }
+    },
+    "snout": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0]
+      },
+      "children": {}
+    },
+    "ear_left": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0]
+      },
+      "children": {}
+    },
+    "ear_right": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0]
+      },
+      "children": {}
+    },
+    "arm_left_upper": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_elbow": [0, -0.22, 0]
+      },
+      "children": {
+        "arm_left_lower": { "attach": "joint_elbow" }
+      }
+    },
+    "arm_left_lower": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_wrist": [0, -0.2, 0]
+      },
+      "children": {
+        "hand_left": { "attach": "joint_wrist" }
+      }
+    },
+    "hand_left": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0]
+      },
+      "children": {}
+    },
+    "arm_right_upper": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_elbow": [0, -0.22, 0]
+      },
+      "children": {
+        "arm_right_lower": { "attach": "joint_elbow" }
+      }
+    },
+    "arm_right_lower": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_wrist": [0, -0.2, 0]
+      },
+      "children": {
+        "hand_right": { "attach": "joint_wrist" }
+      }
+    },
+    "hand_right": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0]
+      },
+      "children": {}
+    },
+    "leg_left_upper": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_knee": [0, -0.28, 0.05]
+      },
+      "children": {
+        "leg_left_lower": { "attach": "joint_knee" }
+      }
+    },
+    "leg_left_lower": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_hock": [0, -0.22, -0.08]
+      },
+      "children": {
+        "paw_left": { "attach": "joint_hock" }
+      }
+    },
+    "paw_left": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0]
+      },
+      "children": {}
+    },
+    "leg_right_upper": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_knee": [0, -0.28, 0.05]
+      },
+      "children": {
+        "leg_right_lower": { "attach": "joint_knee" }
+      }
+    },
+    "leg_right_lower": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0],
+        "joint_hock": [0, -0.22, -0.08]
+      },
+      "children": {
+        "paw_right": { "attach": "joint_hock" }
+      }
+    },
+    "paw_right": {
+      "vital": false,
+      "references": {
+        "origin": [0, 0, 0]
+      },
+      "children": {}
+    }
+  }
+}

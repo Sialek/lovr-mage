@@ -19,14 +19,19 @@ function player:new(position, rotation, scale)
   self.inputHandler = nil
   self.firstPersonCamera = nil
   self.thirdPersonCamera = nil
+  self.cameraMode = 'third'
+  self.thirdPersonDistance = 3.0
+  self.thirdPersonPivotOffset = vector(0, 1.0, 0)
 
-  self.bodyPlanFilename = "asset/character/player/body_plan.json"
+  self.characterMappingPath = 'asset/character/player/wolf_default.json'
   self.body = nil
 end
 
 function player:load()
-  self.body = body(self.bodyPlanFilename)
+  self.body = body(self.characterMappingPath)
   self.body:load()
+  self.body:update(0)
+  self.eyeOffset = self.body:getEyeOffset()
 
   self.inputHandler = inputHandler(self)
   self.inputHandler:load()
@@ -154,10 +159,7 @@ function player:draw(pass)
   pass:rotate(self.orientation)
   pass:scale(self.scale)
   self.body:draw(pass)
-  pass:setColor(1, 0, 0, 1)
-  pass:capsule(vector(0, 0, 0), 0.5, 1.5, 0, 90, 0.0, 0, 8)
   pass:pop()
-
 end
 
 return player
